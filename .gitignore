@@ -9,3 +9,4 @@ frontend/node_modules/
 *.log
 
 trend_analysis/backend/venv/
+trend_analysis/backend/venv/
