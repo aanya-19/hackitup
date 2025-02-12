@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Features</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        function loadGoogleTranslate() {
+            let script = document.createElement('script');
+            script.src = "https://translate.google.com/translate_a/element.js?cb=initTranslate";
+            document.head.appendChild(script);
+        }
+
+        function initTranslate() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en' },
+                'google_translate_element'
+            );
+        }
+
+        // Load script after a slight delay to ensure it runs
+        setTimeout(loadGoogleTranslate, 1000);
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+    </script>
+    <style>
+        /* Google Translate Styling */
+        #google_translate_element {
+            display: flex;
+            align-items: center;
+        }
+        
+        .goog-te-gadget {
+            font-family: Arial, sans-serif !important;
+            font-size: 14px !important;
+            color: white !important;
+        }
+        .goog-te-gadget select {
+            background: #fff;
+            color: #000;
+            border: solid 1px #000;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+        }
+        .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+        }
+        body > .skiptranslate {
+            display: none !important;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .navbar img {
+            height: 70px;
+        }
+        .navbar .menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        .navbar .button {
+            background-color: #10b981;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar .button:hover {
+            background-color: #0e0f0e;
+        }
+
+        /* Feature Card Styling */
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 64px;
+            height: 64px;
+            background: #ECFDF5;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+        .feature-card svg {
+            width: 40px;
+            height: 40px;
+            color: #10B981;
+        }
+        .feature-card h2 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1F2937;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="navbar">
+        <div class="logo">
+            <img src="nav.jpeg" alt="Youth Startup Logo">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="#">OurFeatures</a>
+            <a href="about.html">AboutUs</a>
+        </div>
+        <div class="right-menu flex items-center gap-4">
+            <a href="#" class="button">LogIn</a>
+            <a href="#" class="button">SignUp</a>
+            <div id="google_translate_element" class="ml-2"></div>
+          </div>
+          
+    </div>
+
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl font-bold text-center text-gray-900 mb-4">Our Features</h1>
+            <p class="text-xl text-center text-gray-600 mb-12">
+                Discover the tools and resources we offer to help your startup succeed.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features -->
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h2>Country-based Women Startup Policies</h2>
+                    <p>Explore startup policies for women entrepreneurs across different countries with our interactive map.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h2>Mentor/Investor Matching</h2>
+                    <p>Connect with experienced mentors and potential investors to grow your startup.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="video"></i>
+                    </div>
+                    <h2>Virtual Pitch Platform</h2>
+                    <p>Practice and perfect your pitch with our virtual platform and get valuable feedback.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="megaphone"></i>
+                    </div>
+                    <h2>Brand Advertisement</h2>
+                    <p>Create compelling advertisements for your brand to reach your target audience effectively.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <h2>Brand Name Generator</h2>
+                    <p>Generate unique and catchy brand names for your startup with our AI-powered tool.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="handshake"></i>
+                    </div>
+                    <h2>Startup Collaboration</h2>
+                    <p>Find and collaborate with other startups to share resources and accelerate growth.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h2>Startup Profit Prediction</h2>
+                    <p>Utilize our ML-powered tool to predict potential profits and growth for your startup.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="heart"></i>
+                    </div>
+                    <h2>Motivational Corner</h2>
+                    <p>Get inspired by success stories, quotes, and tips from successful entrepreneurs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <h2>Government Policies in India</h2>
+                    <p>Stay updated with the latest government policies and initiatives for startups in India.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

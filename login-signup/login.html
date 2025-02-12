@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://translate.google.com/translate_a/element.js?cb=initTranslate"></script>
+    <style>
+        /* Global Styles */
+        #google_translate_element {
+            display: inline-block;
+            margin-left: 10px;  /* Adjust spacing */
+          }
+          
+          .goog-te-gadget {
+            font-family: Arial, sans-serif !important;
+            font-size: 14px !important;
+            color: white !important;
+          }
+          
+          .goog-te-gadget select {
+            background: #fffefe;  /* Match button color */
+            color: rgb(15, 15, 15);
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            border: solid 1px #0e0f0e;
+          }
+          
+          /* Fix dropdown overlapping */
+          .goog-te-gadget .goog-te-combo {
+            height: 30px;
+            font-size: 14px;
+            padding: 5px;
+          }
+          
+          /* Ensure dropdown stays inside navbar */
+          .goog-te-gadget {
+            display: flex;
+            align-items: center;
+          }
+          
+          /* Hide "Powered by Google" */
+          .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+          }
+          
+          /* Hide floating translate bar */
+          body > .skiptranslate {
+            display: none !important;
+          }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;  /* Fix issue */
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;  /* Ensure full width */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar img {
+            height: 70px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .button {
+            background-color: #10b981;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0e0f0e;
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 900px;
+            height: 550px;
+            background: white;
+            display: flex;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;  /* Fix overlapping issue */
+        }
+
+        /* Left Section (Image) */
+        .image-section {
+            width: 50%;
+            background-color: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-section img {
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Right Section (Form) */
+        .form-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-box:focus {
+            border-color:  #10b981;
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Login Button */
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color:  #10b981;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #000000;
+        }
+
+        /* Signup Text */
+        .signup-text {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup-text a {
+            color:  #10b981;
+            text-decoration: none;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nav.jpeg" alt="Youth Startup Logo">
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="right-menu">
+            
+            <div id="google_translate_element"></div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <!-- Left Section: Image -->
+        <div class="image-section">
+            <img src="https://source.unsplash.com/450x450/?technology" alt="Login Image">
+        </div>
+
+        <!-- Right Section: Login Form -->
+        <div class="form-section">
+            <h2>Welcome Back</h2>
+            <p>Login to continue</p>
+
+            <input type="text" placeholder="Email" class="input-box">
+            <input type="password" placeholder="Password" class="input-box">
+
+            <button class="login-button">Login</button>
+            
+            <p class="signup-text">
+                Don't have an account? <a href="#">Sign up</a>
+            </p>
+        </div>
+    </div>
+<script>function loadGoogleTranslate() {
+    if (!document.querySelector("script[src*='translate.google.com']")) {
+      let script = document.createElement("script");
+      script.src = "https://translate.google.com/translate_a/element.js?cb=initTranslate";
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }
+
+  function initTranslate() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en' },
+      'google_translate_element'
+    );
+  }
+
+  // Load script after a slight delay to ensure it runs
+  setTimeout(loadGoogleTranslate, 1000);</script>
+</body>
+</html>
+
+

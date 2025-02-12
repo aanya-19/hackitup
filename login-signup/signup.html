@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <script src="https://translate.google.com/translate_a/element.js?cb=initTranslate"></script>
+    <style>
+        #google_translate_element {
+            display: inline-block;
+            margin-left: 10px;  /* Adjust spacing */
+          }
+          
+          .goog-te-gadget {
+            font-family: Arial, sans-serif !important;
+            font-size: 14px !important;
+            color: white !important;
+          }
+          
+          .goog-te-gadget select {
+            background: #fffefe;  /* Match button color */
+            color: rgb(15, 15, 15);
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            border: solid 1px #0e0f0e;
+          }
+          
+          /* Fix dropdown overlapping */
+          .goog-te-gadget .goog-te-combo {
+            height: 30px;
+            font-size: 14px;
+            padding: 5px;
+          }
+          
+          /* Ensure dropdown stays inside navbar */
+          .goog-te-gadget {
+            display: flex;
+            align-items: center;
+          }
+          
+          /* Hide "Powered by Google" */
+          .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+          }
+          
+          /* Hide floating translate bar */
+          body > .skiptranslate {
+            display: none !important;
+          }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar img {
+            height: 70px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .signup-container {
+            width: 900px;
+            height: 600px;
+            background: white;
+            display: flex;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .image-section {
+            width: 50%;
+            background-color: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-section img {
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #10b981;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .signup-button:hover {
+            background-color: #000000;
+        }
+
+        .login-text {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #10b981;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nav.jpeg" alt="Youth Startup Logo">
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="signup-container">
+        <div class="image-section">
+            <img src="https://source.unsplash.com/450x450/?startup" alt="Signup Image">
+        </div>
+
+        <div class="form-section">
+            <h2>Create an Account</h2>
+            <p>Sign up to get started</p>
+
+            <input type="text" placeholder="Full Name" class="input-box">
+            <input type="email" placeholder="Email" class="input-box">
+            <input type="password" placeholder="Password" class="input-box">
+            <input type="password" placeholder="Confirm Password" class="input-box">
+
+            <button class="signup-button">Sign Up</button>
+            
+            <p class="login-text">Already have an account? <a href="#">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        function loadGoogleTranslate() {
+            if (!document.querySelector("script[src*='translate.google.com']")) {
+                let script = document.createElement("script");
+                script.src = "https://translate.google.com/translate_a/element.js?cb=initTranslate";
+                script.async = true;
+                document.head.appendChild(script);
+            }
+        }
+
+        function initTranslate() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+
+        setTimeout(loadGoogleTranslate, 1000);
+    </script>
+</body>
+</html>

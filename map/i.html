@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #google_translate_element {
+            display: inline-block;
+            margin-left: 10px;  /* Adjust spacing */
+          }
+          
+          .goog-te-gadget {
+            font-family: Arial, sans-serif !important;
+            font-size: 14px !important;
+            color: white !important;
+          }
+          
+          .goog-te-gadget select {
+            background: #fffefe;  /* Match button color */
+            color: rgb(15, 15, 15);
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            border: solid 1px #0e0f0e;
+          }
+          
+          /* Fix dropdown overlapping */
+          .goog-te-gadget .goog-te-combo {
+            height: 30px;
+            font-size: 14px;
+            padding: 5px;
+          }
+          
+          /* Ensure dropdown stays inside navbar */
+          .goog-te-gadget {
+            display: flex;
+            align-items: center;
+          }
+          
+          /* Hide "Powered by Google" */
+          .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+          }
+          
+          /* Hide floating translate bar */
+          body > .skiptranslate {
+            display: none !important;
+          }
+          
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          background-color: #ffffff;
+          color: #333;
+        }
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #fff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          position: relative;
+          z-index: 10;
+        }
+        .navbar img {
+          height: 70px;
+        }
+        .navbar .menu {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .navbar a {
+          text-decoration: none;
+          color: #333;
+          font-weight: 500;
+        }
+        .navbar .button {
+          background-color: #10b981;
+          color: #fff;
+          padding: 8px 15px;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+        }
+        .navbar .button:hover {
+          background-color: #0e0f0e;
+        }
+/* Center align the map and policy box */
+.map-policy-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* Full-width box styling */
+.map-box, .policy-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;  /* Takes most of the screen width */
+    max-width: 1200px;  /* Limits excessive stretching on large screens */
+    margin-bottom: 20px;
+}
+
+/* Map Styling */
+#map {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+}
+
+/* Policy Box Styling */
+#policy-box {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 15px;
+}
+
+#policy-box h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #10b981;
+    text-align: center;
+}
+
+#policy-box ul {
+    padding-left: 20px;
+}
+
+#policy-box li {
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    list-style-type: none;
+    border-left: 5px solid #10b981;
+    font-size: 18px;
+}
+
+/* Ensure good spacing on larger screens */
+@media (min-width: 1400px) {
+    .map-box, .policy-box {
+        width: 80%;
+    }
+}
+
+
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nav.jpeg" alt="Youth Startup Logo">
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="right-menu">
+            <a href="#" class="button">LogIn</a>
+            <a href="#" class="button">SignUp</a>
+            <div id="google_translate_element"></div>
+        </div>
+    </div>
+    <h2 style="text-align: center; margin-top: 20px;">Explore Startup Policies for Young Women – Country Wise</h2>
+
+    <div class="map-policy-container">
+        <!-- Map Box (On Top) -->
+        <div class="map-box">
+            <h3 style="text-align: center;">Interactive Map</h3>
+            <div id="map"></div>
+        </div>
+    
+        <!-- Policy Box (Below Map) -->
+        <div class="policy-box">
+            <h3>Startup Policies for Women</h3>
+            <div id="policy-box"><p>Click on a country to see policies.</p></div>
+        </div>
+    </div>
+    
+
+  
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function loadGoogleTranslate() {
+            if (!document.querySelector("script[src*='translate.google.com']")) {
+              let script = document.createElement("script");
+              script.src = "https://translate.google.com/translate_a/element.js?cb=initTranslate";
+              script.async = true;
+              document.head.appendChild(script);
+            }
+          }
+        
+          function initTranslate() {
+            new google.translate.TranslateElement(
+              { pageLanguage: 'en' },
+              'google_translate_element'
+            );
+          }
+          setTimeout(loadGoogleTranslate, 1000);
+      var map = L.map('map').setView([20, 0], 2); // Centered on the world
+  
+      // Add Tile Layer (World Map)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+  
+      // Country Click Event
+      function onCountryClick(event, feature) {
+        const country = feature.properties.name.trim().toLowerCase();
+        console.log("Clicked Country:", country);
+        console.log("Available Countries in CSV:", Object.keys(policies));
+        displayPolicies(country);
+    }
+    
+  
+      // Load GeoJSON (World Countries)
+      fetch("./world.geo.json")
+    .then(response => response.json())
+    .then(geojsonData => {
+        L.geoJSON(geojsonData, {
+            onEachFeature: function (feature, layer) {
+                layer.on("click", function (event) {
+                    onCountryClick(event, feature);
+                });
+            },
+        }).addTo(map);
+    })
+    .catch(error => console.error("Error loading GeoJSON:", error));
+
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+            
+            fetch("./world.geo.json")
+                .then(response => response.json())
+                .then(geojsonData => {
+                    L.geoJSON(geojsonData, {
+                        onEachFeature: function (feature, layer) {
+                            layer.on("click", function () {
+                                displayPolicies(feature.properties.name);
+                            });
+                        },
+                    }).addTo(map);
+                });
+            
+            function displayPolicies(country) {
+                fetch("./Women_Entrepreneurship_Policies (1).csv")
+                    .then(response => response.text())
+                    .then(csvText => {
+                        const rows = csvText.split("\n").map(row => row.split(","));
+                        const policies = rows.slice(1).filter(row => row[0].trim() === country).map(row => row[1].trim());
+                        
+                        const policyBox = document.getElementById("policy-box");
+                        policyBox.innerHTML = `<h3>${country}</h3>`;
+                        if (policies.length > 0) {
+                            policyBox.innerHTML += `<ul>${policies.map(policy => `<li>${policy}</li>`).join("")}</ul>`;
+                        } else {
+                            policyBox.innerHTML += "<p>No data available</p>";
+                        }
+                    });
+            }
+        });
+    </script>
+  </body>
+</html>

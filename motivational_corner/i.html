@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote of the Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        .quote-container {
+            background: rgb(255, 252, 252);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width:89%;
+        }
+        blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #333;
+        }
+        .author {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #news-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center cards horizontally */
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .news-item {
+            width: 70%; /* Reduce width */
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .news-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .news-item p {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .news-item a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>Business News</h2>
+    <div id="news-container">Loading...</div>
+    <script>
+        async function getBusinessNews() {
+            try {
+                console.log("Fetching business news...");
+        
+                // Fetch business news from the API
+                const response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_686336ed708aa0875d75e78b4b1260eaea840&category=business&language=en&country=in`);
+                const data = await response.json();
+        
+                console.log("Fetched News:", data.results);
+        
+                if (!data.results || data.results.length === 0) {
+                    throw new Error("No business news found");
+                }
+        
+                // Strictly filter only business news (no mixed categories)
+                const businessNews = data.results.filter(article => 
+                    article.category.length === 1 && article.category.includes("business")
+                );
+        
+                console.log("Strictly Filtered Business News:", businessNews);
+        
+                if (businessNews.length === 0) {
+                    throw new Error("No strictly business news available.");
+                }
+        
+                const newsContainer = document.getElementById("news-container");
+                newsContainer.innerHTML = ""; // Clear old news
+        
+                businessNews.slice(0, 5).forEach((article, index) => {
+                    console.log(`Business News ${index + 1}:`, article.title); // Debugging
+        
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+        
+                    newsItem.innerHTML = `
+                        <h3>${article.title}</h3>
+                        <p>${article.description || "No description available."}</p>
+                        <a href="${article.link}" target="_blank">Read More</a>
+                    `;
+        
+                    newsContainer.appendChild(newsItem);
+                });
+        
+            } catch (error) {
+                console.error("Error fetching news:", error);
+                document.getElementById("news-container").innerHTML = "❌ Failed to load business news.";
+            }
+        }
+        
+        // Fetch news when the page loads
+        getBusinessNews();
+        
+        // Auto-refresh news every 30 minutes
+        setInterval(getBusinessNews, 1800000);
+    </script>
+
+</body>
+</html>

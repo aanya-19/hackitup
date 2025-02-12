@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement Contact Filter</title>
+    <style>
+        #google_translate_element {
+            display: inline-block;
+            margin-left: 10px;  /* Adjust spacing */
+          }
+          
+          .goog-te-gadget {
+            font-family: Arial, sans-serif !important;
+            font-size: 14px !important;
+            color: white !important;
+          }
+          
+          .goog-te-gadget select {
+            background: #fffefe;  /* Match button color */
+            color: rgb(15, 15, 15);
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            border: solid 1px #0e0f0e;
+          }
+          
+          /* Fix dropdown overlapping */
+          .goog-te-gadget .goog-te-combo {
+            height: 30px;
+            font-size: 14px;
+            padding: 5px;
+          }
+          
+          /* Ensure dropdown stays inside navbar */
+          .goog-te-gadget {
+            display: flex;
+            align-items: center;
+          }
+          
+          /* Hide "Powered by Google" */
+          .goog-logo-link, .goog-te-gadget span {
+            display: none !important;
+          }
+          
+          /* Hide floating translate bar */
+          body > .skiptranslate {
+            display: none !important;
+          }
+          
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          background-color: #ffffff;
+          color: #333;
+          text-align: center;
+        }
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+          background-color: #fff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          position: relative;
+          z-index: 10;
+        }
+        .navbar img {
+          height: 70px;
+        }
+        .navbar .menu {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .navbar a {
+          text-decoration: none;
+          color: #333;
+          font-weight: 500;
+        }
+        .navbar .button {
+          background-color: #10b981;
+          color: #fff;
+          padding: 8px 15px;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+        }
+        .navbar .button:hover {
+          background-color: #0e0f0e;
+        }
+        .container {
+            max-width: 87vw;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        
+        /* Filters - Vertical Layout */
+        .filters {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        select, button {
+            width: 70%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0e0f0e;
+        }
+
+        /* Cards Layout */
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            text-align: left;
+        }
+        .card h3 {
+            margin: 0;
+            color: #10b981;
+        }
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nav.jpeg" alt="Youth Startup Logo">
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="right-menu">
+            <a href="#" class="button">LogIn</a>
+            <a href="#" class="button">SignUp</a>
+            <div id="google_translate_element"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Brand Advertisement</h2>
+        
+        <!-- Filters (Stacked Vertically) -->
+        <div class="filters">
+            <select id="location">
+                <option value="">Select Location</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+            </select>
+
+            <select id="adType">
+                <option value="">Select Ad Type</option>
+                <option value="Newspaper">Newspaper</option>
+                <option value="Billboard">Billboard</option>
+                <option value="Digital Ads">Digital Ads</option>
+                <option value="TV/Radio Ads">TV/Radio Ads</option>
+            </select>
+
+            <button onclick="fetchData()">Apply Filter</button>
+        </div>
+
+        <!-- Results Cards -->
+        <div class="results" id="resultsContainer">
+            <!-- Data will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        function loadGoogleTranslate() {
+            if (!document.querySelector("script[src*='translate.google.com']")) {
+              let script = document.createElement("script");
+              script.src = "https://translate.google.com/translate_a/element.js?cb=initTranslate";
+              script.async = true;
+              document.head.appendChild(script);
+            }
+          }
+        
+          function initTranslate() {
+            new google.translate.TranslateElement(
+              { pageLanguage: 'en' },
+              'google_translate_element'
+            );
+          }
+          setTimeout(loadGoogleTranslate, 1000);
+        const sampleData = [
+            { name: "Ravi Kumar", email: "ravi@example.com", contact: "9876543210", adType: "Newspaper", location: "Mumbai" },
+            { name: "Aisha Khan", email: "aisha@example.com", contact: "8765432109", adType: "Digital Ads", location: "Delhi" },
+            { name: "John Doe", email: "john@example.com", contact: "7654321098", adType: "Billboard", location: "Bangalore" },
+            { name: "Priya Sharma", email: "priya@example.com", contact: "6543210987", adType: "TV/Radio Ads", location: "Chennai" }
+        ];
+
+        function fetchData() {
+            const location = document.getElementById("location").value;
+            const adType = document.getElementById("adType").value;
+
+            // Filter data
+            const filteredData = sampleData.filter(item => 
+                (location === "" || item.location === location) &&
+                (adType === "" || item.adType === adType)
+            );
+
+            // Display data
+            const resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.innerHTML = "";
+            if (filteredData.length === 0) {
+                resultsContainer.innerHTML = `<p>No results found</p>`;
+            } else {
+                filteredData.forEach(item => {
+                    resultsContainer.innerHTML += `
+                        <div class="card">
+                            <h3>${item.name}</h3>
+                            <p><strong>Email:</strong> ${item.email}</p>
+                            <p><strong>Contact:</strong> ${item.contact}</p>
+                            <p><strong>Ad Type:</strong> ${item.adType}</p>
+                            <p><strong>Location:</strong> ${item.location}</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
