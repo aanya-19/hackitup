@@ -8,3 +8,4 @@ frontend/node_modules/
 .DS_Store
 *.log
 
+trend_analysis/backend/venv/
