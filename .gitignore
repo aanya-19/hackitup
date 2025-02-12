@@ -1,0 +1,10 @@
+# Ignore virtual environments
+backend/venv/
+
+# Ignore node modules
+frontend/node_modules/
+
+# Ignore system files
+.DS_Store
+*.log
+
