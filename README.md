@@ -14,7 +14,7 @@
 
 ***API*** : Google Translate, HuggingFace , Quotable, Google Trends
 
-***Other*** : Visual Studio Code , 
+***Other*** : Visual Studio Code
 
 
 Homepage
