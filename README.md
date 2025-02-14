@@ -3,6 +3,7 @@
 * An innovative youth-driven startup platform designed to empower the next generation of entrepreneurs.
 * We provide resources, networking opportunities, and mentorship to help young minds turn their ideas into reality and build impactful businesses.
 
+
 ***Frontend*** : HTML, CSS, JS, React
 
 ***Backend*** : Flask, Nodejs
@@ -14,6 +15,7 @@
 ***API*** : Google Translate, HuggingFace , Quotable, Google Trends
 
 ***Other*** : Visual Studio Code , 
+
 
 Homepage
 <br>
