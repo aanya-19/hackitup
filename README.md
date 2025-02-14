@@ -4,6 +4,7 @@
 * We provide resources, networking opportunities, and mentorship to help young minds turn their ideas into reality and build impactful businesses.
 
 
+
 ***Frontend*** : HTML, CSS, JS, React
 
 ***Backend*** : Flask, Nodejs
