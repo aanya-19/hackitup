@@ -27,6 +27,7 @@
 - Manage Events
 - Motivational Corner
 - Government Policies in India
+- Multinigual
 
 Homepage
 <br>
